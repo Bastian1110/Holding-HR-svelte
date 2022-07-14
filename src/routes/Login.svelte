@@ -1,5 +1,8 @@
 <script>
     import axios from 'axios';
+    import {replace} from 'svelte-spa-router';
+
+    let error = 0;
 
     let loginData = {
         email: "",
@@ -10,13 +13,21 @@
         await axios.post('http://localhost:5000/api/v1/login',loginData)
         .then(function (res) {
             console.log(res);
+            localStorage.setItem('user',res.data.user);
             localStorage.setItem('token',res.data.token);
+            replace('/dashboard');
         })
         .catch(function (err) {
-            console.log(err);
+            console.log("Login Failed");
+            error = 1;
         });
 
     };
+
+    let user = localStorage.getItem('user');
+    $:if(user){
+        replace('/dashboard');
+    }
 </script>
 
 <main class="body-bg min-h-screen pt-12 md:pt-20 pb-6 px-2 md:px-0">
@@ -39,6 +50,13 @@
             </form>
         </section>
 
+        {#if error > 0}
+            <div class="alert alert-error shadow-lg block mt-20">
+                <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Error! Porfavor verifica los datos</span>
+                </div>
+            </div>
+        {/if}
     </div>
-
 </main>
