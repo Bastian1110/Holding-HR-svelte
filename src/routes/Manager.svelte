@@ -1,12 +1,11 @@
 <script>
-    import NavBar from '../components/NavBar.svelte';
-
-    //Test         
+    import NavBar from '../components/NavBar.svelte';       
     import TemplateManager from '../components/TemplateManager.svelte';
-    import EmpresasTest from './Tables/EmpresasTest.svelte';
+    import EmpresasTemp from './Tables/EmpresasTemp.svelte';
+    import StatusTemp from './Tables/StatusTemp.svelte'
 
-    let table = 'Ninguna'
-    let currentTemplate = null;
+    let currentTable = 'empresas';
+    let currentTemplate = EmpresasTemp;
 </script>
 
 
@@ -17,15 +16,15 @@
         <label tabindex="0" class="btn btn-primary m-1">Tabla</label>
         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
           <li><button on:click={()=>{
-            table = 'Status';
-            currentTemplate = null;
+            currentTable = 'status';
+            currentTemplate = StatusTemp;
             }}>
             Status
             </button>
           </li>
           <li><button on:click={()=>{
-            table = 'Empresas';
-            currentTemplate = EmpresasTest;
+            currentTable = 'empresas';
+            currentTemplate = EmpresasTemp;
             }}>
             Empresas
             </button>
@@ -33,6 +32,6 @@
         </ul>
     </div>
     <label for="createNew" class="btn btn-accent modal-button ml-[20%]">Añadir +</label>
-    <h2 class="font-bold text-2xl float-right m-10 mr-[10%]">{table}</h2>
-    <TemplateManager objectCard={currentTemplate}/>
+    <h2 class="font-bold text-2xl float-right m-10 mr-[10%] text-purple-900">{currentTable}</h2>
+    <TemplateManager table={currentTable} objectCard={currentTemplate}/>
 </main>

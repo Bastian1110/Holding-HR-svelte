@@ -2,11 +2,12 @@
     import {onMount} from 'svelte';
     import {getTableList, createTable, deleteTable} from '../lib/tables';
 
-    export let table = 'empresas';
+    export let table;
     export let objectCard;
 
     let objectList = [];    
     onMount(async () =>{
+        console.log("Fetching new data ...")
         const res = await getTableList(table);
         // @ts-ignore
         objectList = res;
@@ -25,7 +26,7 @@
 <main>
     <div class="w-[65%]">
         {#each objectList as object}
-        <svelte:component this={objectCard} base={object}/>
+        <svelte:component this={objectCard} base={object} deleteFunction={deleteNew}/>
         {/each}
     </div>
 </main>
