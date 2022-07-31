@@ -15,6 +15,7 @@
             console.log(res);
             localStorage.setItem('user',res.data.user);
             localStorage.setItem('token',res.data.token);
+            localStorage.setItem('rol',res.data.rol);
             replace('/dashboard');
         })
         .catch(function (err) {

@@ -10,6 +10,7 @@
 
 </script>
 
-<main data-theme="pastel">
+
+<main data-theme="light" class="">
   <Router {routes} on:conditionsFailed={conditionsFailed}/>
 </main>

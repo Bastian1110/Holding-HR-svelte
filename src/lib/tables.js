@@ -21,6 +21,17 @@ export const createTable = async(table,data) =>{
     }
 }
 
+export const updateTable = async(table,data) =>{
+    try{
+        const res = await Api.put(table,data);
+        return res;
+    }
+    catch(err){
+        console.log("Añadir señal de error")
+        console.error(err);
+    }
+}
+
 export const deleteTable = async(table,id) =>{
     try{
         const res = await Api.delete(table+'/'+id);

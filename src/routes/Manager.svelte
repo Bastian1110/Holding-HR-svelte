@@ -1,11 +1,9 @@
 <script>
-    import NavBar from '../components/NavBar.svelte';       
-    import TemplateManager from '../components/TemplateManager.svelte';
-    import EmpresasTemp from './Tables/EmpresasTemp.svelte';
-    import StatusTemp from './Tables/StatusTemp.svelte'
+    import NavBar from '../components/NavBar.svelte';  
+    import {replace} from 'svelte-spa-router';    
 
-    let currentTable = 'empresas';
-    let currentTemplate = EmpresasTemp;
+    let admin = (localStorage.getItem('rol') == "admin") ?  true : false;
+    export let currentTable;
 </script>
 
 
@@ -16,22 +14,44 @@
         <label tabindex="0" class="btn btn-primary m-1">Tabla</label>
         <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
           <li><button on:click={()=>{
-            currentTable = 'status';
-            currentTemplate = StatusTemp;
+            replace('/manager/candidato');
+            }}>
+            Candidatos
+            </button>
+          </li>
+          <li><button on:click={()=>{
+            replace('/manager/entrevista');
+            }}>
+            Entrevista
+            </button>
+          </li>
+          {#if admin}
+          <li><button on:click={()=>{
+            replace('/manager/empresa');
+            }}>
+            Empresas
+            </button>
+          </li>
+          <li><button on:click={()=>{
+            replace('/manager/puesto');
+            }}>
+            Puesto
+            </button>
+          </li>
+          <li><button on:click={()=>{
+            replace('/manager/status');
             }}>
             Status
             </button>
           </li>
           <li><button on:click={()=>{
-            currentTable = 'empresas';
-            currentTemplate = EmpresasTemp;
+            replace('/manager/origen');
             }}>
-            Empresas
+            Origen
             </button>
           </li>
+          {/if}
         </ul>
     </div>
-    <label for="createNew" class="btn btn-accent modal-button ml-[20%]">Añadir +</label>
-    <h2 class="font-bold text-2xl float-right m-10 mr-[10%] text-purple-900">{currentTable}</h2>
-    <TemplateManager table={currentTable} objectCard={currentTemplate}/>
+    <label for={currentTable} class="btn btn-accent modal-button ml-[20%]">Añadir +</label>
 </main>

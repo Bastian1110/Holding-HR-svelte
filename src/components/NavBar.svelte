@@ -6,6 +6,7 @@
         localStorage.clear();
         replace('/');
     }
+    let admin = (localStorage.getItem('rol') == "admin") ?  true : false;
 </script>
 
 <main>
@@ -17,7 +18,10 @@
             </label>
             <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><button on:click={()=>{replace('/dashboard');}}>Dashboard</button></li>
-              <li><button on:click={()=>{replace('/manager');}}>Manager</button></li>
+              <li><button on:click={()=>{replace('/manager/candidato');}}>Manager</button></li>
+              {#if admin}
+              <li><button on:click={()=>{replace('/usermanager');}}>Usuarios</button></li>
+              {/if}
             </ul>
           </div>
         <div class="flex-1">
@@ -30,7 +34,7 @@
               <h1 class="font-bold text-xl mr-10">{user}</h1>
             </label>
             <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
-              <li><a href="/">Settings</a></li>
+              <li><button on:click={() => replace('/settings')}>Settings</button></li>
               <li><button on:click={logout}>Logout</button></li>
             </ul>
         </div>

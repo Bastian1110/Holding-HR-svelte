@@ -7,15 +7,15 @@
     $:if(!user){
         replace('/');
     }
-</script>
 
+</script>
 
 <main>
     <NavBar/>
     <div class="hero min-h-screen">
         <div class="hero-content text-center">
             <div class="max-w-md">
-                <h1 class="text-5xl font-bold">En desarrollo!</h1>
+                <h1 class="text-5xl font-bold">Settings en desarrollo!</h1>
             </div>
         </div>
     </div>
